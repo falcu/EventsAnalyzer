@@ -19,7 +19,7 @@ class ExcelDataProvider:
 
     @computeBefore
     def headers(self):
-        return self._file.columns
+        return self._file.columns.values
 
 class ReturnDataProvider:
     def __init__(self, pricesProvider):
@@ -33,4 +33,16 @@ class ReturnDataProvider:
         stockReturns        = oneToTPrices.sub(zeroToTMinus1Prices).divide(zeroToTMinus1Prices )
 
         return stockReturns
+
+class StockDataProvider:
+    def __init__(self, stockProvider):
+        self._stockProvider = stockProvider
+
+    def stocks(self):
+        #First column ignore
+        return self._stockProvider.headers()[1:]
+
+    def priceDates(self):
+        data = self._stockProvider.file()
+        return data.loc[data.index[0]].values()
 

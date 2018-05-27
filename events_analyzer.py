@@ -1,5 +1,8 @@
 import pandas as pd
 from decorators import computeBefore
+from random import shuffle, randint
+
+
 
 class AbnormalReturnResult:
     def __init__(self, ar, nOfStocks, l2 ):
@@ -98,4 +101,37 @@ class IntegerIndexWindow:
 
     def toIndexStandarized(self):
         return [i for i in range(0, self.end - self.start)]
+
+class SampleGenerator:
+    def __init__(self, stockDataProvider):
+        self._stockDataProvider = stockDataProvider
+
+    def generate(self, numberOfStocks, estimationWindowLength, eventsWindowLength, windowBuilder=None):
+        stocksSample = self._stocksSample(numberOfStocks)
+        stocksWindows = StocksWindows(windowBuilder=windowBuilder)
+        for aStock in stocksSample:
+            t1, t2, t3 = self._buildWindowSample(estimationWindowLength, eventsWindowLength)
+            stocksWindows.addStockWindow(aStock, t1, t2, t3)
+
+        return SampleData(stocksSample, stocksWindows)
+
+    def _stocksSample(self, numberOfStocks):
+        allStocks = self._stockDataProvider.stocks()
+        shuffle(allStocks)
+        return allStocks[0:numberOfStocks]
+
+    def _buildWindowSample(self, estimationWindowLength, eventsWindowLength):
+        numberOfDates = len(self._stockDataProvider.priceDates())
+        t2 = randint(estimationWindowLength, numberOfDates - eventsWindowLength)  #Day of event
+        t1 = t2 - estimationWindowLength
+        t3 = t2 + eventsWindowLength
+
+        return t1, t2, t3
+
+
+class SampleData:
+    def __init__(self, sampleOfStocks, stocksWindows):
+        self.sampleOfStocks = sampleOfStocks
+        self.stocksWindows = stocksWindows
+
 
