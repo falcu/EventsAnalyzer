@@ -22,13 +22,17 @@ def test3():
     stocksPath= r'D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\stocks.xlsx'
     marketPath= r'D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\s&p.xlsx'
     stocksPriceProvider = providers.ExcelDataProvider(stocksPath,'Precios')
+    stocksPriceProvider.file()
     marketPriceProvider = providers.ExcelDataProvider(marketPath,'Precios')
+    marketPriceProvider.file()
     stocksReturnsProvider = providers.ReturnDataProvider(stocksPriceProvider)
     marketReturnProvider = providers.ReturnDataProvider(marketPriceProvider)
 
     mm = market_model.MarketModel(stocksReturnsProvider,marketReturnProvider)
-    windowXOM = events_analyzer.IntegerIndexWindow(1,251)
-    windowABV = events_analyzer.IntegerIndexWindow(250,500)
-    window    = events_analyzer.IntegerIndexWindow(0,250)
-    windowsData = market_model.ComputeWindowData(['XOM','ABV'], {'XOM':windowXOM, 'ABV':windowABV}, window)
-    return mm.compute(windowsData)
+    stocksWindows = events_analyzer.StocksWindows()
+    stocksWindows.addStockWindow('XOM',1 , 251, 261 )
+    stocksWindows.addStockWindow('ABV',250 , 500, 510 )
+    abnormalReturnCalc = events_analyzer.AbnormalReturnCalculator( mm )
+    cumCalc = events_analyzer.CumulativeCalculator()
+
+    return cumCalc.cumulativeAR( abnormalReturnCalc, stocksWindows )

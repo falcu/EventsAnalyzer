@@ -1,13 +1,5 @@
 import pandas as pd
-from functools import wraps
-
-def loadFileBefore(f):
-    @wraps(f)
-    def wrapper(self, *args, **kwargs):
-        self.loadFile()
-        return f(self, *args, *kwargs)
-    return wrapper
-
+from decorators import computeBefore
 
 class ExcelDataProvider:
     def __init__(self, fileName, sheetName):
@@ -16,16 +8,16 @@ class ExcelDataProvider:
         self._file        = None
         self._loaded     = False
 
-    def loadFile(self):
+    def preCompute(self):
         if not self._loaded:
             self._loaded = True
             self._file = pd.read_excel( self.fileName, self.sheetName)
 
-    @loadFileBefore
+    @computeBefore
     def file(self):
         return self._file
 
-    @loadFileBefore
+    @computeBefore
     def headers(self):
         return self._file.columns
 
