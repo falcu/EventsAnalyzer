@@ -1,5 +1,7 @@
 import pandas as pd
-from decorators import computeBefore
+
+from model.decorators import computeBefore
+
 
 class ExcelDataProvider:
     def __init__(self, fileName, sheetName):
