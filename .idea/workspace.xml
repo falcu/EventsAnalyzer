@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95e8c8f5-783a-43a8-b52f-2a7cc6d64520" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/model/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_base.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_events_analyzer.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_files/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleteme.py" afterPath="$PROJECT_DIR$/deleteme.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/decorators.py" afterPath="$PROJECT_DIR$/model/decorators.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/events_analyzer.py" afterPath="$PROJECT_DIR$/model/events_analyzer.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/market_model.py" afterPath="$PROJECT_DIR$/model/market_model.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/providers.py" afterPath="$PROJECT_DIR$/model/providers.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -132,7 +122,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="1934" />
     <option name="height" value="997" />
@@ -275,8 +265,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
