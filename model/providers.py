@@ -1,5 +1,4 @@
 import pandas as pd
-
 from model.decorators import computeBefore
 
 
@@ -28,13 +27,23 @@ class ReturnDataProvider:
         self.pricesProvider = pricesProvider
 
     def computeReturns(self):
-        prices = self.pricesProvider.file()
-        #Assume first column has dates
-        zeroToTMinus1Prices = prices.loc[prices.index[0:-1], prices.columns[1:]]
-        oneToTPrices        = prices.loc[prices.index[1:], prices.columns[1:]].set_index(zeroToTMinus1Prices.index)
+        prices = self._pricesMatrix()
+        zeroToTMinus1Prices = prices.loc[prices.index[0:-1]]
+        oneToTPrices        = prices.loc[prices.index[1:]].set_index(zeroToTMinus1Prices.index)
         stockReturns        = oneToTPrices.sub(zeroToTMinus1Prices).divide(zeroToTMinus1Prices )
 
         return stockReturns
+
+    def computeMean(self):
+        return self._pricesMatrix().mean(axis=0)
+
+    def computeVariance(self):
+        return self._pricesMatrix().var(axis=0)
+
+    def _pricesMatrix(self):
+        # Assume first column has dates
+        prices = self.pricesProvider.file()
+        return prices.loc[prices.index, prices.columns[1:]]
 
 class StockDataProvider:
     def __init__(self, stockProvider):

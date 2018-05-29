@@ -1,13 +1,26 @@
 from unittest import TestCase
-import os
 import tests.test_base as test_base
 from model import providers
 from model import market_model
 from model import events_analyzer
 
-class CumulativeCalculatorTest( TestCase ):
+class ParametricTestByCumulativeARTest( TestCase ):
 
     def test_cumulativeAR_fromTestData_computesCorrectValue(self):
+        parametricTest = self._makeParametricTestByCumulativeAR()
+
+        result = parametricTest.cumulativeAR()
+
+        self.assertAlmostEqual(-0.047443369, result, 7 )
+
+    def test_testValue_fromTestData_computesCorrectValue(self):
+        parametricTest = self._makeParametricTestByCumulativeAR()
+
+        result = parametricTest.testValue()
+
+        self.assertAlmostEqual(-0.0031613674, result, 7 )
+
+    def _makeParametricTestByCumulativeAR(self):
         stocksPriceProvider = providers.ExcelDataProvider(test_base.getTestStocksFile(), 'Precios')
         marketPriceProvider = providers.ExcelDataProvider(test_base.getTestSandPFile(), 'Precios')
         stocksReturnsProvider = providers.ReturnDataProvider(stocksPriceProvider)
@@ -18,8 +31,7 @@ class CumulativeCalculatorTest( TestCase ):
         stocksWindows.addStockWindow('AAON', 250, 500, 510)
         stocksWindows.addStockWindow('AAP', 500, 750, 760)
         abnormalReturnCalc = events_analyzer.AbnormalReturnCalculator(marketModel)
-        cumCalc = events_analyzer.CumulativeCalculator()
+        parametricTest = events_analyzer.ParametricTestByCumulativeAR(abnormalReturnCalc)
+        parametricTest.workWith(stocksWindows)
 
-        result = cumCalc.cumulativeAR(abnormalReturnCalc, stocksWindows)
-
-        self.assertAlmostEqual(-0.047443369, result, 7 )
+        return parametricTest

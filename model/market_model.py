@@ -2,10 +2,12 @@ import statsmodels.formula.api as sm
 import pandas as pd
 
 class MarketModelData:
-    def __init__(self, estimatedParameters, allReturnsMatrix, marketName):
+    def __init__(self, estimatedParameters, allReturnsMatrix, marketName, marketMean, marketVariance):
         self.estimatedParameters    = estimatedParameters
         self.allReturnsMatrix       = allReturnsMatrix
         self.marketName             = marketName
+        self.marketMean             = marketMean
+        self.marketVariance         = marketVariance
 
 class MarketModel:
     def __init__(self, stockReturnsProvider, marketReturnProvider):
@@ -25,9 +27,14 @@ class MarketModel:
             computeReturns      = allReturnsMatrix.loc[allReturnsMatrix.index[estimationWindow.toIndex()],[marketName,stockName]]\
                                                 .set_index(allReturnsMatrix.index[estimationWindow.toIndexStandarized()])
             stockModel = sm.ols(formula=formulaFunc(stockName), data=computeReturns).fit()
-            parameters.append(stockModel.params.rename_axis({'Intercept':'intercept', marketName:'beta'}).to_frame(stockName))
+            currentParams = stockModel.params.rename_axis({'Intercept':'intercept', marketName:'beta'})
+            currentParams = currentParams.append( pd.Series({'resid_variance':stockModel.mse_resid}))
+            parameters.append(currentParams.to_frame(stockName))
             #mse_resid  is the variance of residuals
         estimatedParameters = pd.concat(parameters, axis=1)
-        return MarketModelData( estimatedParameters, allReturnsMatrix, marketName)
+        marketVariance  = self.marketReturnProvider.computeVariance()
+        marketMean      = self.marketReturnProvider.computeMean()
+
+        return MarketModelData( estimatedParameters, allReturnsMatrix, marketName, marketMean, marketVariance)
 
 
