@@ -28,12 +28,14 @@ class MarketModel:
                                                 .set_index(allReturnsMatrix.index[estimationWindow.toIndexStandarized()])
             stockModel = sm.ols(formula=formulaFunc(stockName), data=computeReturns).fit()
             currentParams = stockModel.params.rename_axis({'Intercept':'intercept', marketName:'beta'})
-            currentParams = currentParams.append( pd.Series({'resid_variance':stockModel.mse_resid}))
+            marketVariance = self.marketReturnProvider.computeVariance(index=estimationWindow.toIndex()).values[0]
+            marketMean = self.marketReturnProvider.computeMean(index=estimationWindow.toIndex()).values[0]
+            currentParams = currentParams.append( pd.Series({'resid_variance':stockModel.mse_resid,
+                                                 'market_mean':marketMean, 'market_variance':marketVariance}))
+
             parameters.append(currentParams.to_frame(stockName))
             #mse_resid  is the variance of residuals
         estimatedParameters = pd.concat(parameters, axis=1)
-        marketVariance  = self.marketReturnProvider.computeVariance()
-        marketMean      = self.marketReturnProvider.computeMean()
 
         return MarketModelData( estimatedParameters, allReturnsMatrix, marketName, marketMean, marketVariance)
 

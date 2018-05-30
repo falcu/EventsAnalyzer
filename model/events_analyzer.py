@@ -1,7 +1,7 @@
-from random import shuffle, randint
 import pandas as pd
 import numpy as np
 from model.decorators import computeBefore
+import scipy.stats as st
 
 class AbnormalReturnResult:
     def __init__(self, ar, arVariance, nOfStocks ):
@@ -23,46 +23,27 @@ class AbnormalReturnCalculator:
         abnormalReturnsVariance                 = []
         for aStock in stocksWindows.stocks():
             window                              =stocksWindows.getStockWindow(aStock)
-            # Compute AR
             eventWindow                         = window.eventWindow()
             standarizedIndexEventWindow         = eventWindow.toIndexStandarized()
+            # Compute AR
             stockReturnsEventWindow             = stocksReturns.loc[stocksReturns.index[eventWindow.toIndex()], [aStock] ]\
                                                         .set_index(stocksReturns.index[standarizedIndexEventWindow])
             marketReturnsEventWindow            = marketReturns.loc[marketReturns.index[eventWindow.toIndex()] ]\
                                                         .set_index(marketReturns.index[standarizedIndexEventWindow] )
             marketReturnsEventWindow.columns    = [aStock]
-            alpha                               = estimatedParams.loc[estimatedParams.index[0:1], [aStock]]
-            beta                                = estimatedParams.loc[estimatedParams.index[1:2], [aStock]]
-            betaRow                             = pd.concat([beta]*marketReturnsEventWindow.shape[0], axis=0)
-            betaRow                             = betaRow.set_index(marketReturnsEventWindow.index[standarizedIndexEventWindow])
-            betaRow.columns                     = [aStock]
-            alphaRow                            = pd.concat([alpha]*marketReturnsEventWindow.shape[0], axis=0)
-            alphaRow                            = alphaRow.set_index(marketReturnsEventWindow.index[standarizedIndexEventWindow])
-            alphaRow.columns                    = [aStock]
-            marketModelReturnsEventWindow       = marketReturnsEventWindow.multiply(betaRow).add(alphaRow)
+            alpha                               = estimatedParams.loc['intercept', aStock]
+            beta                                = estimatedParams.loc['beta', aStock]
+            marketModelReturnsEventWindow       = marketReturnsEventWindow.multiply(beta).add(alpha)
             abnormalReturns.append( stockReturnsEventWindow.sub(marketModelReturnsEventWindow) )
             #Compute AR Variance
-            estimationWindow                     = window.estimationWindow()
-            standarizedIndexEstimationWindow     = estimationWindow.toIndexStandarized()
-            marketReturnsEstimationWindow        = marketReturns.loc[marketReturns.index[estimationWindow.toIndex()]] \
-                .set_index(marketReturns.index[standarizedIndexEstimationWindow])
-            commonIndex                          = marketReturnsEstimationWindow.index[standarizedIndexEstimationWindow]
-            columnLength                         = marketReturnsEstimationWindow.shape[0]
-            residVariance                        = estimatedParams.loc[estimatedParams.index[2:3], [aStock]]
-            residVarianceColumnVector            = self._makeColumnVectorFromValue(residVariance.values[0][0],columnLength,marketModelResult.marketName,
-                                                                                   commonIndex)
-            L1Minus1ColumnVector                 = self._makeColumnVectorFromValue(1.0/window.L1(),columnLength,marketModelResult.marketName,
-                                                                                   commonIndex)
-            marketMeanColumnVector               = self._makeColumnVectorFromValue(marketModelResult.marketMean,columnLength,marketModelResult.marketName,
-                                                                                   commonIndex)
-            marketVarianceColumnVector           = self._makeColumnVectorFromValue(marketModelResult.marketVariance,columnLength,marketModelResult.marketName,
-                                                                                   commonIndex)
-            onesColumnVector                     = self._makeColumnVectorFromValue(1,columnLength,marketModelResult.marketName,
-                                                                                   commonIndex)
+            residVariance                        = estimatedParams.loc['resid_variance', aStock]
+            oneOverL1                            = 1.0/window.L1()
+            marketMean                           = estimatedParams.loc['market_mean', aStock]
+            marketVariance                       = estimatedParams.loc['market_variance', aStock]
 
-            additionalVariance                   = marketReturnsEstimationWindow.sub(marketMeanColumnVector).apply(lambda v : np.power(v,2))\
-                                                        .divide(marketVarianceColumnVector).add(onesColumnVector).multiply(L1Minus1ColumnVector)
-            finalVariance                         = residVarianceColumnVector.add(additionalVariance)
+            additionalVariance                   = marketReturnsEventWindow.sub(marketMean).apply(lambda v : np.power(v,2))\
+                                                        .divide(marketVariance).add(1.0).multiply(oneOverL1)
+            finalVariance                         = additionalVariance.add(residVariance)
             finalVariance.columns                 = [aStock]
             abnormalReturnsVariance.append(finalVariance)
 
@@ -70,14 +51,6 @@ class AbnormalReturnCalculator:
         arVariance = pd.concat(abnormalReturnsVariance, axis=1)
 
         return AbnormalReturnResult( ar, arVariance, ar.shape[1] )
-
-    def _makeColumnVectorFromValue(self, value, length, columnName, index=None):
-        valueAsDF = pd.DataFrame( [value], columns=[columnName] )
-        valueColumnVector = pd.concat([valueAsDF] * length, axis=0)
-        valueColumnVector.columns = [columnName]
-        if not index is None:
-            valueColumnVector=valueColumnVector.set_index(index)
-        return valueColumnVector
 
 class ParametricTestByCumulativeAR:
 
@@ -105,12 +78,19 @@ class ParametricTestByCumulativeAR:
 
     @computeBefore
     def cumulativeARVariance(self):
-        varianceOfARAcrossSecurity = self.arResult.arVariance.sum( axis = 1 ).multiply(1/np.power(self.arResult.nOfStocks,2))
+        varianceOfARAcrossSecurity = self.arResult.arVariance.sum( axis = 1 ).multiply(1.0/np.power(self.arResult.nOfStocks,2.0))
         cumulativeARVariance       = varianceOfARAcrossSecurity.sum( axis =0 )
         return cumulativeARVariance
 
     def testValue(self):
-        return self.cumulativeAR() / self.cumulativeARVariance()
+        return self.cumulativeAR() / np.sqrt( self.cumulativeARVariance() )
+
+    def isSignificant(self, alpha=0.05, twoTails=True ):
+        significance = alpha/2.0 if twoTails else alpha
+        zScore = st.norm.ppf(1-significance)
+        testValue = self.testValue()
+        print("Test value: {}, zScore: {}".format(testValue, zScore))
+        return np.abs(testValue)>=zScore
 
 
 class StocksWindows:
@@ -154,7 +134,7 @@ class Window:
 class IntegerWindowBuilder:
      @classmethod
      def buildEstimationWindow(cls, window):
-         return IntegerIndexWindow(window.t1, window.t2)
+         return IntegerIndexWindow(window.t1, window.t2-1)
 
      @classmethod
      def buildEventWindow(cls, window):
@@ -174,37 +154,5 @@ class IntegerIndexWindow:
 
     def elapsed(self):
         return self.end - self.start
-
-class SampleGenerator:
-    def __init__(self, stockDataProvider):
-        self._stockDataProvider = stockDataProvider
-
-    def generate(self, numberOfStocks, estimationWindowLength, eventsWindowLength, windowBuilder=None):
-        stocksSample = self._stocksSample(numberOfStocks)
-        stocksWindows = StocksWindows(windowBuilder=windowBuilder)
-        for aStock in stocksSample:
-            t1, t2, t3 = self._buildWindowSample(estimationWindowLength, eventsWindowLength)
-            stocksWindows.addStockWindow(aStock, t1, t2, t3)
-
-        return SampleData(stocksSample, stocksWindows)
-
-    def _stocksSample(self, numberOfStocks):
-        allStocks = self._stockDataProvider.stocks()
-        shuffle(allStocks)
-        return allStocks[0:numberOfStocks]
-
-    def _buildWindowSample(self, estimationWindowLength, eventsWindowLength):
-        numberOfDates = len(self._stockDataProvider.priceDates())
-        t2 = randint(estimationWindowLength, numberOfDates - eventsWindowLength)  #Day of event
-        t1 = t2 - estimationWindowLength
-        t3 = t2 + eventsWindowLength
-
-        return t1, t2, t3
-
-
-class SampleData:
-    def __init__(self, sampleOfStocks, stocksWindows):
-        self.sampleOfStocks = sampleOfStocks
-        self.stocksWindows = stocksWindows
 
 

@@ -27,18 +27,24 @@ class ReturnDataProvider:
         self.pricesProvider = pricesProvider
 
     def computeReturns(self):
-        prices = self._pricesMatrix()
+        prices              = self._pricesMatrix()
         zeroToTMinus1Prices = prices.loc[prices.index[0:-1]]
         oneToTPrices        = prices.loc[prices.index[1:]].set_index(zeroToTMinus1Prices.index)
         stockReturns        = oneToTPrices.sub(zeroToTMinus1Prices).divide(zeroToTMinus1Prices )
 
         return stockReturns
 
-    def computeMean(self):
-        return self._pricesMatrix().mean(axis=0)
+    def computeMean(self, index=None):
+        returnMatrix = self.computeReturns()
+        if index is None:
+            index = returnMatrix.index[0:]
+        return returnMatrix.loc[returnMatrix.index[index]].mean(axis=0)
 
-    def computeVariance(self):
-        return self._pricesMatrix().var(axis=0)
+    def computeVariance(self, index=None):
+        returnMatrix = self.computeReturns()
+        if index is None:
+            index = returnMatrix.index[0:]
+        return returnMatrix.loc[returnMatrix.index[index]].var(axis=0)
 
     def _pricesMatrix(self):
         # Assume first column has dates
@@ -53,7 +59,7 @@ class StockDataProvider:
         #First column ignore
         return self._stockProvider.headers()[1:]
 
-    def priceDates(self):
+    def returnDates(self):
         data = self._stockProvider.file()
-        return data.loc[data.index[0]].values()
+        return data.loc[data.index[0]].values[1:] #Ignoring first date of price series
 
