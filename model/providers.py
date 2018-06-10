@@ -12,7 +12,9 @@ class ExcelDataProvider:
     def preCompute(self):
         if not self._loaded:
             self._loaded = True
+            print("Loading file..")
             self._file = pd.read_excel( self.fileName, self.sheetName)
+            print("File loaded")
 
     @computeBefore
     def file(self):
@@ -61,5 +63,5 @@ class StockDataProvider:
 
     def returnDates(self):
         data = self._stockProvider.file()
-        return data.loc[data.index[0]].values[1:] #Ignoring first date of price series
+        return data.loc[data.index[0:],data.columns[0]].values[1:] #Ignoring first date of price series
 

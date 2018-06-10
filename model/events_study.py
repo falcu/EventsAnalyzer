@@ -1,5 +1,6 @@
 from model.events_analyzer import StocksWindows
 from random import shuffle, randint
+from model.events_tests import TwoTailsZScore
 
 class SampleGenerator:
     def __init__(self, stockDataProvider):
@@ -21,7 +22,7 @@ class SampleGenerator:
 
     def _buildWindowSample(self, estimationWindowLength, eventsWindowLength):
         numberOfDates = len(self._stockDataProvider.returnDates())
-        t2 = randint(estimationWindowLength, numberOfDates - eventsWindowLength)  #Day of event
+        t2 = randint(estimationWindowLength, numberOfDates - 1 - eventsWindowLength)  #Day of event
         t1 = t2 - estimationWindowLength
         t3 = t2 + eventsWindowLength
 
@@ -35,7 +36,8 @@ class SampleData:
 
 
 class Simulator:
-    def __init__(self, nOfSamples=1000, nOfStocksInSample=100, estimationWindowSize=250, eventWindowSize=10, sampleGenerator=None, testToUse=None):
+    def __init__(self, nOfSamples=1000, nOfStocksInSample=100, estimationWindowSize=250, eventWindowSize=10,
+                 sampleGenerator=None, testToUse=None, zScoreCalc=None):
         self.nOfSamples             = nOfSamples
         self.nOfStocksInSample      = nOfStocksInSample
         self.estimationWindowSize   = estimationWindowSize
@@ -43,18 +45,22 @@ class Simulator:
         self.sampleGenerator        = sampleGenerator
         self.testToUse              = testToUse
         self.significantQuant       = 0
+        self.zScoreCalc             = zScoreCalc or TwoTailsZScore(0.05)
 
     def simulate(self):
         for i in range(0,self.nOfSamples):
             self._doRun(i+1)
+            print('Significant {} out of {} ({}%)'.format(self.significantQuant, i+1,
+                                                          (self.significantQuant / (i+1)) * 100.0))
 
+        print('------------------------------')
         print('Significant {} out of {} ({}%)'.format(self.significantQuant,self.nOfSamples,self.significantQuant/self.nOfSamples*100.0))
 
     def _doRun(self,sampleNumber):
         print('Sample {}'.format(sampleNumber))
         sampleData = self.sampleGenerator.generate(self.nOfStocksInSample, self.estimationWindowSize, self.eventWindowSize)
-        self.testToUse.workWith( sampleData.stocksWindows )
-        if self.testToUse.isSignificant(twoTails=False):
+        self.testToUse.workWith( sampleData.stocksWindows, zScore=self.zScoreCalc )
+        if self.testToUse.isSignificant():
             self.significantQuant+=1
             print("Is Significant")
         else:

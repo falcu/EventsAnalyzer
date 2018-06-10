@@ -1,5 +1,8 @@
 import datetime
 
+import model.events_tests
+
+
 def testParametricTest():
     from model import providers
     from model import market_model
@@ -17,11 +20,11 @@ def testParametricTest():
     mm = market_model.MarketModel(stocksReturnsProvider, marketReturnProvider)
     stocksWindows = events_analyzer.StocksWindows()
 
-    stocksWindows.addStockWindow('AAME',1 , 251, 261 )
-    stocksWindows.addStockWindow('AAON',250 , 500, 510 )
-    stocksWindows.addStockWindow('AAP',500 , 750, 760 )
+    stocksWindows.addStockWindow('AAME',1 , 251, 260 )
+    stocksWindows.addStockWindow('AAON',250 , 500, 509 )
+    stocksWindows.addStockWindow('AAP',500 , 750, 759 )
     abnormalReturnCalc = events_analyzer.AbnormalReturnCalculator(mm)
-    parametricTest = events_analyzer.ParametricTestByCumulativeAR(abnormalReturnCalc)
+    parametricTest = model.events_tests.RankTest2(abnormalReturnCalc)
     parametricTest.workWith(stocksWindows)
     return parametricTest.testValue()
 
@@ -38,6 +41,7 @@ def doSimulation():
     from model.events_study import SampleGenerator
 
     stocksPath = r'D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\stocks.xlsx'
+    #stocksPath = r'D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\stocks4Test.xlsx'
     marketPath = r'D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\s&p.xlsx'
     stocksPriceProvider = providers.ExcelDataProvider(stocksPath, 'Precios')
     marketPriceProvider = providers.ExcelDataProvider(marketPath, 'Precios')
@@ -45,11 +49,13 @@ def doSimulation():
     marketReturnProvider = providers.ReturnDataProvider(marketPriceProvider)
 
     mm = market_model.MarketModel(stocksReturnsProvider, marketReturnProvider)
-    abnormalReturnCalc = events_analyzer.AbnormalReturnCalculator(mm)
-    parametricTest = events_analyzer.ParametricTestByCumulativeAR(abnormalReturnCalc)
+    shock = events_analyzer.DecreasingShock(2,10)
+    abnormalReturnCalc = events_analyzer.AbnormalReturnCalculator(mm, arShock=shock)
+    eventTest = model.events_tests.ParametricTest1(abnormalReturnCalc)
     stockDataProvider = providers.StockDataProvider(stocksPriceProvider)
     generator = SampleGenerator(stockDataProvider)
-    simulator = events_study.Simulator(sampleGenerator=generator, testToUse=parametricTest)
+    simulator = events_study.Simulator(sampleGenerator=generator, testToUse=eventTest, nOfSamples=100, nOfStocksInSample=50,
+                                       estimationWindowSize=250, eventWindowSize=10)
     simulator.simulate()
 
 

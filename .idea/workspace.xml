@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95e8c8f5-783a-43a8-b52f-2a7cc6d64520" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/model/events_study.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/model/events_tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_events_tests.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test_events_analyzer.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_files/test_stocks_withevents.xlsx" afterPath="$PROJECT_DIR$/tests/test_files/test_stocks_withevents.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleteme.py" afterPath="$PROJECT_DIR$/deleteme.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/events_analyzer.py" afterPath="$PROJECT_DIR$/model/events_analyzer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/market_model.py" afterPath="$PROJECT_DIR$/model/market_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/events_study.py" afterPath="$PROJECT_DIR$/model/events_study.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/providers.py" afterPath="$PROJECT_DIR$/model/providers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_base.py" afterPath="$PROJECT_DIR$/tests/test_base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_events_analyzer.py" afterPath="$PROJECT_DIR$/tests/test_events_analyzer.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,13 +20,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="EventsAnalysis" />
+  </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="decorators.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/decorators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="126">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -33,7 +38,7 @@
       <file leaf-file-name="market_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/market_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
+            <state relative-caret-position="714">
               <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -45,9 +50,11 @@
       <file leaf-file-name="deleteme.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deleteme.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="50" column="49" lean-forward="false" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
-              <folding />
+            <state relative-caret-position="441">
+              <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,20 +62,32 @@
       <file leaf-file-name="events_analyzer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/events_analyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-344">
-              <caret line="44" column="108" lean-forward="false" selection-start-line="44" selection-start-column="108" selection-end-line="44" selection-end-column="108" />
+            <state relative-caret-position="202">
+              <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="events_study.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="events_tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/events_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="events_study.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/events_study.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="50" column="113" lean-forward="false" selection-start-line="50" selection-start-column="113" selection-end-line="50" selection-end-column="113" />
+            <state relative-caret-position="336">
+              <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -79,8 +98,8 @@
       <file leaf-file-name="providers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/providers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="29" column="28" lean-forward="false" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+            <state relative-caret-position="231">
+              <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -88,11 +107,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_events_analyzer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_events_analyzer.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+            <state relative-caret-position="504">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_events_tests.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_events_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-713">
+              <caret line="55" column="37" lean-forward="false" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -103,18 +134,8 @@
       <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Anaconda3/Lib/unittest/case.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
+            <state relative-caret-position="12327">
               <caret line="600" column="0" lean-forward="false" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_base.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="78" lean-forward="false" selection-start-line="17" selection-start-column="78" selection-end-line="17" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -138,9 +159,12 @@
       <find>marketReturnsEventWindow</find>
       <find>computeReturns</find>
       <find>marketReturnsEstimationWindow</find>
+      <find>_makeColumnVectorFromValue</find>
       <find>priceDates</find>
       <find>marketReturnsMatrix</find>
-      <find>_makeColumnVectorFromValue</find>
+      <find>parametricTest</find>
+      <find>stockAR</find>
+      <find>significantQuant</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,19 +177,22 @@
         <option value="$PROJECT_DIR$/decorators.py" />
         <option value="$PROJECT_DIR$/providers.py" />
         <option value="$PROJECT_DIR$/events_analyzer.py" />
-        <option value="$PROJECT_DIR$/deleteme.py" />
         <option value="$PROJECT_DIR$/tests/test_base.py" />
         <option value="$PROJECT_DIR$/model/market_model.py" />
         <option value="$PROJECT_DIR$/tests/test_events_analyzer.py" />
-        <option value="$PROJECT_DIR$/model/events_analyzer.py" />
+        <option value="$PROJECT_DIR$/model/main.py" />
         <option value="$PROJECT_DIR$/model/providers.py" />
+        <option value="$PROJECT_DIR$/model/events_analyzer.py" />
         <option value="$PROJECT_DIR$/model/events_study.py" />
+        <option value="$PROJECT_DIR$/deleteme.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/model/events_tests.py" />
+        <option value="$PROJECT_DIR$/tests/test_events_tests.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1934" />
+    <option name="width" value="1920" />
     <option name="height" value="997" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -216,10 +243,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Guido/Master Finanzas/2018/Primer Trimestre/Metodos No Param/EventsAnalysis/model/events_tests.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\EventsAnalysis" />
       <recent name="D:\Guido\Master Finanzas\2018\Primer Trimestre\Metodos No Param\EventsAnalysis\model" />
     </key>
   </component>
@@ -235,8 +264,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Nosetests in test_events_analyzer.py">
-    <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_cumulativeAR_fromTestData_computesCorrectValue" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Nosetests in test_events_tests.py">
+    <configuration name="Nosetests for test_events_tests.RankTestTest.test_isSignificant_fromTestDataWithEvents_shouldBe" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -248,10 +277,10 @@
       <module name="EventsAnalysis" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_events_analyzer.ParametricTestByCumulativeARTest.test_cumulativeAR_fromTestData_computesCorrectValue&quot;" />
+      <option name="_new_target" value="&quot;test_events_tests.RankTestTest.test_isSignificant_fromTestDataWithEvents_shouldBe&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+    <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -263,10 +292,10 @@
       <module name="EventsAnalysis" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe&quot;" />
+      <option name="_new_target" value="&quot;test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestData_shouldNotBe" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+    <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -278,10 +307,10 @@
       <module name="EventsAnalysis" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestData_shouldNotBe&quot;" />
+      <option name="_new_target" value="&quot;test_events_tests.RankTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+    <configuration name="Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -293,10 +322,10 @@
       <module name="EventsAnalysis" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue&quot;" />
+      <option name="_new_target" value="&quot;test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Nosetests in test_events_analyzer.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+    <configuration name="Nosetests in test_events_tests.py" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -308,23 +337,23 @@
       <module name="EventsAnalysis" />
       <option name="_new_regexPattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_events_analyzer.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_events_tests.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetests in test_events_analyzer.py" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_cumulativeAR_fromTestData_computesCorrectValue" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestData_shouldNotBe" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_isSignificant_fromTestDataWithEvents_shouldBe" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in test_events_tests.py" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetests in test_events_analyzer.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_cumulativeAR_fromTestData_computesCorrectValue" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestData_shouldNotBe" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetests in test_events_tests.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_isSignificant_fromTestDataWithEvents_shouldBe" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" />
       </list>
     </recent_temporary>
   </component>
@@ -345,35 +374,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_cumulativeAR_fromTestData_computesCorrectValue - 2018.05.29 at 22h 51m 31s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_cumulativeAR_fromTestData_computesCorrectValue" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_RankTestTest_test_isSignificant_fromTestDataWithEvents_shouldBe - 2018.06.10 at 18h 18m 47s.xml">
+      <configuration name="Nosetests for test_events_tests.RankTestTest.test_isSignificant_fromTestDataWithEvents_shouldBe" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_isSignificant_fromTestDataWithEvents_shouldBe - 2018.05.29 at 22h 48m 02s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_RankTestTest_test_testValue_fromTestDataWithEvents_computesCorrectValue - 2018.06.10 at 18h 18m 32s.xml">
+      <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_isSignificant_fromTestDataWithEvents_shouldBe - 2018.05.29 at 22h 50m 06s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_RankTestTest_test_testValue_fromTestDataWithEvents_computesCorrectValue - 2018.06.10 at 18h 18m 51s.xml">
+      <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_isSignificant_fromTestDataWithEvents_shouldBe - 2018.05.29 at 22h 50m 20s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_RankTestTest_test_testValue_fromTestDataWithEvents_computesCorrectValue - 2018.06.10 at 18h 19m 06s.xml">
+      <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_isSignificant_fromTestDataWithEvents_shouldBe - 2018.05.29 at 22h 50m 38s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestDataWithEvents_shouldBe" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_RankTestTest_test_testValue_fromTestDataWithNoEvents_computesCorrectValue - 2018.06.10 at 18h 18m 27s.xml">
+      <configuration name="Nosetests for test_events_tests.RankTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_isSignificant_fromTestData_shouldNotBe - 2018.05.29 at 22h 50m 46s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_isSignificant_fromTestData_shouldNotBe" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_SignTestTest_test_testValue_fromTestDataWithEvents_computesCorrectValue - 2018.06.10 at 18h 18m 15s.xml">
+      <configuration name="Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_testValue_fromTestData_computesCorrectValue - 2018.05.29 at 22h 51m 02s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_SignTestTest_test_testValue_fromTestDataWithEvents_computesCorrectValue - 2018.06.10 at 18h 18m 23s.xml">
+      <configuration name="Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_testValue_fromTestData_computesCorrectValue - 2018.05.29 at 22h 51m 15s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" configurationId="tests" />
+    <history-entry file="Nosetests_for_test_events_tests_SignTestTest_test_testValue_fromTestDataWithNoEvents_computesCorrectValue - 2018.06.10 at 18h 18m 11s.xml">
+      <configuration name="Nosetests for test_events_tests.SignTestTest.test_testValue_fromTestDataWithNoEvents_computesCorrectValue" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_for_test_events_analyzer_ParametricTestByCumulativeARTest_test_testValue_fromTestData_computesCorrectValue - 2018.05.29 at 22h 51m 27s.xml">
-      <configuration name="Nosetests for test_events_analyzer.ParametricTestByCumulativeARTest.test_testValue_fromTestData_computesCorrectValue" configurationId="tests" />
+    <history-entry file="Nosetests_in_test_events_tests_py - 2018.06.10 at 18h 19m 15s.xml">
+      <configuration name="Nosetests in test_events_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Nosetests_in_test_events_analyzer_py - 2018.05.29 at 22h 51m 50s.xml">
-      <configuration name="Nosetests in test_events_analyzer.py" configurationId="tests" />
+    <history-entry file="Nosetests_in_test_events_tests_py - 2018.06.10 at 18h 19m 57s.xml">
+      <configuration name="Nosetests in test_events_tests.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -386,25 +415,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1058" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3206934" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32438478" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3176734" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39653304" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24093817" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3274918" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39485458" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21750806" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -435,45 +465,30 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/model/events_analyzer.py</url>
-          <line>85</line>
-          <option name="timeStamp" value="32" />
+          <url>file://$PROJECT_DIR$/model/events_tests.py</url>
+          <line>115</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/model/events_tests.py</url>
+          <line>132</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/model/events_analyzer.py</url>
-          <line>80</line>
-          <option name="timeStamp" value="33" />
+          <line>50</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/model/events_analyzer.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/model/events_analyzer.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/model/market_model.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/model/events_analyzer.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/model/market_model.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="39" />
+          <line>86</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="40" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python Console Debugger">
@@ -482,11 +497,106 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/model/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/market_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deleteme.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/events_analyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2919">
+          <caret line="140" column="55" lean-forward="false" selection-start-line="140" selection-start-column="55" selection-end-line="140" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/events_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2583">
+          <caret line="123" column="74" lean-forward="false" selection-start-line="123" selection-start-column="74" selection-end-line="123" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/events_study.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/providers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_events_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1617">
+          <caret line="84" column="37" lean-forward="true" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12327">
+          <caret line="600" column="0" lean-forward="false" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/xml/etree/ElementTree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="1222" column="0" lean-forward="false" selection-start-line="1222" selection-start-column="0" selection-end-line="1222" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -500,43 +610,15 @@
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
+        <state relative-caret-position="12327">
           <caret line="600" column="0" lean-forward="false" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_events_analyzer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/providers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="29" column="28" lean-forward="false" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/market_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
+        <state relative-caret-position="714">
           <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -544,30 +626,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deleteme.py">
+    <entry file="file://$PROJECT_DIR$/model/decorators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="50" column="49" lean-forward="false" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+        <state relative-caret-position="126">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/events_analyzer.py">
+    <entry file="file://$PROJECT_DIR$/deleteme.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-344">
-          <caret line="44" column="108" lean-forward="false" selection-start-line="44" selection-start-column="108" selection-end-line="44" selection-end-column="108" />
+        <state relative-caret-position="441">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/providers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/events_study.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="50" column="113" lean-forward="false" selection-start-line="50" selection-start-column="113" selection-end-line="50" selection-end-column="113" />
+        <state relative-caret-position="336">
+          <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/events_analyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/events_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_events_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-713">
+          <caret line="55" column="37" lean-forward="false" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

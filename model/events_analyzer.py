@@ -1,17 +1,42 @@
-import pandas as pd
 import numpy as np
-from model.decorators import computeBefore
-import scipy.stats as st
+import pandas as pd
+
 
 class AbnormalReturnResult:
-    def __init__(self, ar, arVariance, nOfStocks ):
-        self.ar = ar
+    def __init__(self, arEventWindow, arEstimationWindow, arVariance, nOfStocks ):
+        self.arEventWindow = arEventWindow
+        self.arEstimationWindow = arEstimationWindow
         self.arVariance = arVariance
         self.nOfStocks = nOfStocks
 
+class NullAbnormalReturnShock:
+    def doShock(self, stockReturnsEventWindow):
+        return stockReturnsEventWindow
+
+class DecreasingShock:
+    def __init__(self, volatilityFactor, theLambda ):
+        self.volatilityFactor = volatilityFactor
+        self.theLambda          = theLambda
+
+    def doShock(self, stockReturnsEventWindow):
+        increasingIntegerMatrix = pd.DataFrame([ [i]*stockReturnsEventWindow.shape[1] for i in range(stockReturnsEventWindow.shape[0])])
+        n0 = self._n0(stockReturnsEventWindow)
+        shockValueFunc = lambda value : n0 * np.exp(-value/self.theLambda)
+        shockMatrix = increasingIntegerMatrix.apply(shockValueFunc).set_index(stockReturnsEventWindow.index)
+        shockMatrix.columns = stockReturnsEventWindow.columns
+
+        return shockMatrix
+
+    def _n0(self, stockReturnsEventWindow):
+        stockVolat = np.sqrt( stockReturnsEventWindow.var()[0] )
+        return self.volatilityFactor*stockVolat
+
+
+
 class AbnormalReturnCalculator:
-    def __init__(self, marketModel):
+    def __init__(self, marketModel, arShock=None):
         self.marketModel = marketModel
+        self.arShock = arShock or NullAbnormalReturnShock()
 
     def computeAR(self, stocksWindows):
         marketModelResult                       = self.marketModel.compute(stocksWindows)
@@ -19,22 +44,36 @@ class AbnormalReturnCalculator:
         estimatedParams                         = marketModelResult.estimatedParameters
         stocksReturns                           = allReturnsMatrix.loc[allReturnsMatrix.index,allReturnsMatrix.columns[1:]]
         marketReturns                           = allReturnsMatrix.loc[allReturnsMatrix.index,allReturnsMatrix.columns[0:1]]
-        abnormalReturns                         = []
+        abnormalReturnsEventWindow              = []
+        abnormalReturnsEstimationWindow         = []
         abnormalReturnsVariance                 = []
         for aStock in stocksWindows.stocks():
-            window                              =stocksWindows.getStockWindow(aStock)
-            eventWindow                         = window.eventWindow()
-            standarizedIndexEventWindow         = eventWindow.toIndexStandarized()
+            window                                  = stocksWindows.getStockWindow(aStock)
+            eventWindow                             = window.eventWindow()
+            estimationWindow                        = window.estimationWindow()
+            standarizedIndexEventWindow             = eventWindow.toIndexStandarized()
+            standarizedIndexEstimationWindow        = estimationWindow.toIndexStandarized()
             # Compute AR
-            stockReturnsEventWindow             = stocksReturns.loc[stocksReturns.index[eventWindow.toIndex()], [aStock] ]\
+            stockReturnsEventWindow                 = stocksReturns.loc[stocksReturns.index[eventWindow.toIndex()], [aStock] ]\
                                                         .set_index(stocksReturns.index[standarizedIndexEventWindow])
-            marketReturnsEventWindow            = marketReturns.loc[marketReturns.index[eventWindow.toIndex()] ]\
+            stockReturnsEstimationWindow            = stocksReturns.loc[stocksReturns.index[estimationWindow.toIndex()], [aStock] ]\
+                                                        .set_index(stocksReturns.index[standarizedIndexEstimationWindow])
+            marketReturnsEventWindow                = marketReturns.loc[marketReturns.index[eventWindow.toIndex()] ]\
                                                         .set_index(marketReturns.index[standarizedIndexEventWindow] )
-            marketReturnsEventWindow.columns    = [aStock]
-            alpha                               = estimatedParams.loc['intercept', aStock]
-            beta                                = estimatedParams.loc['beta', aStock]
-            marketModelReturnsEventWindow       = marketReturnsEventWindow.multiply(beta).add(alpha)
-            abnormalReturns.append( stockReturnsEventWindow.sub(marketModelReturnsEventWindow) )
+            marketReturnsEstimationWindow           = marketReturns.loc[marketReturns.index[estimationWindow.toIndex()]] \
+                                                        .set_index(marketReturns.index[standarizedIndexEstimationWindow])
+
+            stockReturnsEventWindow                 = self.arShock.doShock( stockReturnsEventWindow )
+            marketReturnsEventWindow.columns        = [aStock]
+            marketReturnsEstimationWindow.columns   = [aStock]
+            alpha                                   = estimatedParams.loc['intercept', aStock]
+            beta                                    = estimatedParams.loc['beta', aStock]
+            marketModelReturnsEventWindow           = marketReturnsEventWindow.multiply(beta).add(alpha)
+            marketModelReturnsEstimationWindow      = marketReturnsEstimationWindow.multiply(beta).add(alpha)
+            stockAREventWindow                      = stockReturnsEventWindow.sub(marketModelReturnsEventWindow)
+            stockAREstimationWindow                 = stockReturnsEstimationWindow.sub(marketModelReturnsEstimationWindow)
+            abnormalReturnsEventWindow.append( stockAREventWindow )
+            abnormalReturnsEstimationWindow.append( stockAREstimationWindow )
             #Compute AR Variance
             residVariance                        = estimatedParams.loc['resid_variance', aStock]
             oneOverL1                            = 1.0/window.L1()
@@ -47,50 +86,11 @@ class AbnormalReturnCalculator:
             finalVariance.columns                 = [aStock]
             abnormalReturnsVariance.append(finalVariance)
 
-        ar = pd.concat(abnormalReturns, axis=1)
+        arEventWindow = pd.concat(abnormalReturnsEventWindow, axis=1)
+        arEstimationWindow = pd.concat(abnormalReturnsEstimationWindow, axis=1)
         arVariance = pd.concat(abnormalReturnsVariance, axis=1)
 
-        return AbnormalReturnResult( ar, arVariance, ar.shape[1] )
-
-class ParametricTestByCumulativeAR:
-
-    def __init__(self, arCalculator):
-        self.arCalculator = arCalculator
-        self.stocksWindow = None
-        self.arComputed   = False
-        self.arResult     = None
-
-    def workWith(self, stocksWindow):
-        self.stocksWindow = stocksWindow
-        self.arComputed = False
-
-    def preCompute(self):
-        if not self.arComputed and self.stocksWindow:
-            self.arResult = self.arCalculator.computeAR( self.stocksWindow )
-            self.arComputed = True
-
-    @computeBefore
-    def cumulativeAR(self):
-        cumAccrossSecurity = self.arResult.ar.sum( axis = 1 )
-        cumAccrossSecurityAvg = cumAccrossSecurity.divide( self.arResult.nOfStocks )
-        cumAR = cumAccrossSecurityAvg.sum( axis = 0 )
-        return cumAR
-
-    @computeBefore
-    def cumulativeARVariance(self):
-        varianceOfARAcrossSecurity = self.arResult.arVariance.sum( axis = 1 ).multiply(1.0/np.power(self.arResult.nOfStocks,2.0))
-        cumulativeARVariance       = varianceOfARAcrossSecurity.sum( axis =0 )
-        return cumulativeARVariance
-
-    def testValue(self):
-        return self.cumulativeAR() / np.sqrt( self.cumulativeARVariance() )
-
-    def isSignificant(self, alpha=0.05, twoTails=True ):
-        significance = alpha/2.0 if twoTails else alpha
-        zScore = st.norm.ppf(1-significance)
-        testValue = self.testValue()
-        print("Test value: {}, zScore: {}".format(testValue, zScore))
-        return np.abs(testValue)>=zScore
+        return AbnormalReturnResult( arEventWindow, arEstimationWindow, arVariance, len(stocksWindows.stocks()) )
 
 
 class StocksWindows:
@@ -134,7 +134,7 @@ class Window:
 class IntegerWindowBuilder:
      @classmethod
      def buildEstimationWindow(cls, window):
-         return IntegerIndexWindow(window.t1, window.t2-1)
+         return IntegerIndexWindow(window.t1, window.t2)
 
      @classmethod
      def buildEventWindow(cls, window):
