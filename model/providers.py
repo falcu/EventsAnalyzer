@@ -12,7 +12,7 @@ class ExcelDataProvider:
     def preCompute(self):
         if not self._loaded:
             self._loaded = True
-            print("Loading file..")
+            print("Loading {}".format(self.fileName))
             self._file = pd.read_excel( self.fileName, self.sheetName)
             print("File loaded")
 

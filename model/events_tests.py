@@ -47,41 +47,61 @@ class TwoTailsZScore(ZScore):
 
 class EventTest:
     def __init__(self, arCalculator, zScore=None):
-        self.arCalculator = arCalculator
-        self.stocksWindow = None
-        self.arComputed   = False
-        self.arResult     = None
-        self.zScoreCalc   = self.getZScoreCalculator(zScore)
+        self.arCalculator           = arCalculator
+        self.stocksWindow           = None
+        self.arComputed             = False
+        self.arResult               = None
+        self.zScoreCalc             = self.getZScoreCalculator(zScore)
+        self._wasTestValueComputed = False
 
     def getZScoreCalculator(self, zScore):
         return zScore or TwoTailsZScore(0.05)
 
     def workWith(self, stocksWindow, zScore=None):
-        self.stocksWindow   = stocksWindow
-        self.arComputed     = False
-        self.zScoreCalc     = self.getZScoreCalculator(zScore)
+        self.stocksWindow           = stocksWindow
+        self.arComputed             = False
+        self.zScoreCalc             = self.getZScoreCalculator(zScore)
+        self._wasTestValueComputed  = False
 
     def preCompute(self):
         if not self.arComputed and self.stocksWindow:
             self.arResult = self.arCalculator.computeAR( self.stocksWindow )
             self.arComputed = True
 
-    @abstractmethod
+    @computeBefore
     def testValue(self):
+        if not self._wasTestValueComputed:
+            self._wasTestValueComputed = True
+        return self._testValueCompute()
+
+    @abstractmethod
+    def _testValueCompute(self):
         pass
 
     def isSignificant(self ):
         testValue = self.testValue()
-        zLimit    = self.zScoreCalc.zLimit()
-        print("Test value: {}, Z-limit: {}".format(testValue, zLimit))
         return self.zScoreCalc.isSignificant(testValue)
 
+    def zLimit(self):
+        return self.zScoreCalc.zLimit()
+
+    @computeBefore
+    def nOfEvents(self):
+        return self.arResult.nOfStocks
+
+    @abstractmethod
+    def testName(self):
+        pass
+
     @classmethod
-    def makeTest(cls, testName, arCalculator, zScoreCalc=None):
-        testsCandidates =  cls.__subclasses__()
+    def makeTest(cls, arCalculator, zScoreCalc=None, testName='all'):
+        testsCandidatesClass =  cls.__subclasses__()
         try:
-            testClass = next(test for test in testsCandidates if test.__name__==testName)
-            return testClass(arCalculator, zScoreCalc)
+            allTests = [testClass(arCalculator, zScoreCalc) for testClass in testsCandidatesClass]
+            if testName == 'all':
+                return allTests
+            else:
+                return next(aTest for aTest in allTests if aTest.testName()==testName)
         except:
             raise Exception('Test {} does not exist'.format(testName))
 
@@ -95,8 +115,7 @@ class ParametricTest1( EventTest ):
     def __init__(self, arCalculator, zScoreCalc=None):
         super().__init__( arCalculator, zScoreCalc )
 
-    @computeBefore
-    def testValue(self):
+    def _testValueCompute(self):
         arEventW = self.arResult.arEventWindow
         arEstimationW = self.arResult.arEstimationWindow
         cumAccrossSecEstimationW= arEstimationW.sum(axis=1).divide( self.arResult.nOfStocks )
@@ -106,13 +125,15 @@ class ParametricTest1( EventTest ):
                                             /self.arResult.nOfStocks
         return cumAccrossSecurityAvgTime0 / standardDeviation
 
+    def testName(self):
+        return 'ParametricTest1'
+
 class ParametricTest2( EventTest ):
 
     def __init__(self, arCalculator, zScoreCalc=None):
         super().__init__( arCalculator, zScoreCalc )
 
-    @computeBefore
-    def testValue(self):
+    def _testValueCompute(self):
         arEventW = self.arResult.arEventWindow
         arEstimationW = self.arResult.arEstimationWindow
         t = arEstimationW.shape[0]
@@ -123,13 +144,15 @@ class ParametricTest2( EventTest ):
 
         return standarizedAR.sum(axis=1).loc[standarizedAR.index[0]]*(1.0/np.sqrt(n))
 
+    def testName(self):
+        return 'ParametricTest2'
+
 class RankTest(EventTest):
 
     def __init__(self, arCalculator, zScoreCalc=None):
         super().__init__( arCalculator, zScoreCalc )
 
-    @computeBefore
-    def testValue(self):
+    def _testValueCompute(self):
         arEventW = self.arResult.arEventWindow
         arEstimationW = self.arResult.arEstimationWindow
         ar = pd.concat( [arEstimationW,arEventW] ).reset_index(drop=True)
@@ -151,40 +174,61 @@ class RankTest(EventTest):
 
         return np.sqrt(sumAccrossTime/t)
 
+    def testName(self):
+        return 'RankTest'
+
 class SignTest(EventTest):
 
     def __init__(self, arCalculator, zScoreCalc=None):
         super().__init__( arCalculator, zScoreCalc )
 
-    @computeBefore
-    def testValue(self):
-        allCount, positiveCount = self.count()
+    def _testValueCompute(self):
+        allCount, positiveCount = self._count()
         return ((positiveCount/allCount) - 0.5)*np.sqrt(allCount)/0.5
 
-    @computeBefore
-    def count(self):
+    def _count(self):
         oneDimensionValues = np.concatenate(self.arResult.arEventWindow.values)
         return len(oneDimensionValues), sum(n>0 for n in oneDimensionValues)
 
+    def testName(self):
+        return 'SignTest'
+
+class EventTestSet:
+    def __init__(self, tests=None):
+        self._tests = tests or []
+
+    def addTest(self, aTest):
+        self._tests.append( aTest )
+
+    def workWith(self, stocksWindow, zScore=None):
+        for aTest in self._tests:
+            aTest.workWith( stocksWindow, zScore)
+
+    def allTests(self):
+        return self._tests
+
+    def allTestNames(self):
+        return [t.testName() for t in self.allTests()]
+
 #Additional:
-class ParametricTestByCumulativeAR(EventTest):
-
-    def __init__(self, arCalculator):
-        super().__init__( arCalculator )
-
-    @computeBefore
-    def cumulativeAR(self):
-        cumAccrossSecurity = self.arResult.arEventWindow.sum( axis = 1 )
-        cumAccrossSecurityAvg = cumAccrossSecurity.divide( self.arResult.nOfStocks )
-        cumAR = cumAccrossSecurityAvg.sum( axis = 0 )
-        return cumAR
-
-    @computeBefore
-    def cumulativeARVariance(self):
-        varianceOfARAcrossSecurity = self.arResult.arVariance.sum( axis = 1 ).multiply(1.0/np.power(self.arResult.nOfStocks,2.0))
-        cumulativeARVariance       = varianceOfARAcrossSecurity.sum( axis =0 )
-        return cumulativeARVariance
-
-    @computeBefore
-    def testValue(self):
-        return self.cumulativeAR() / np.sqrt( self.cumulativeARVariance() )
+# class ParametricTestByCumulativeAR(EventTest):
+#
+#     def __init__(self, arCalculator):
+#         super().__init__( arCalculator )
+#
+#     @computeBefore
+#     def cumulativeAR(self):
+#         cumAccrossSecurity = self.arResult.arEventWindow.sum( axis = 1 )
+#         cumAccrossSecurityAvg = cumAccrossSecurity.divide( self.arResult.nOfStocks )
+#         cumAR = cumAccrossSecurityAvg.sum( axis = 0 )
+#         return cumAR
+#
+#     @computeBefore
+#     def cumulativeARVariance(self):
+#         varianceOfARAcrossSecurity = self.arResult.arVariance.sum( axis = 1 ).multiply(1.0/np.power(self.arResult.nOfStocks,2.0))
+#         cumulativeARVariance       = varianceOfARAcrossSecurity.sum( axis =0 )
+#         return cumulativeARVariance
+#
+#     @computeBefore
+#     def testValue(self):
+#         return self.cumulativeAR() / np.sqrt( self.cumulativeARVariance() )

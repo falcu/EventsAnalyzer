@@ -58,6 +58,29 @@ def doSimulation():
                                        estimationWindowSize=250, eventWindowSize=10)
     simulator.simulate()
 
+def testPlot():
+    import random
+    from model.events_study import SimulatorLogger
+    simulations = 1000
+    tags = [50,100,150,200]
+    data = {}
+    testNames = ['test1', 'test2','test3','test4']
+    for t in tags:
+        t_str = str(t)
+        data.update({t_str:{}})
+        for n in testNames:
+            data[t_str].update({n:{'simulation':{}}})
+            for i in range(1,simulations+1):
+                r=random.randint(0, 100)
+                data[t_str][n].update({'n_events': t})
+                data[t_str][n]['simulation'].update({i: {'z_value': '', 'z_limit': '', 'is_significant': bool(r<7)}})
+
+    logger = SimulatorLogger()
+    logger._logData = data
+    logger._testNames = set(testNames)
+    logger.plot()
+
+
 
 class DummyStockProvider:
     def stocks(self):
